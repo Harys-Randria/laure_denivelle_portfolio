@@ -1,0 +1,174 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* ─────────────────────────────────────────────────────────────
+     Portfolio Laure Denivelle — Light Mode
+     Palette extraite de la bannière BI :
+       · Bleu marine   #0A1628  → primary (textes forts, CTA)
+       · Bleu électrique #1E6FD9 → liens, accents interactifs
+       · Bleu moyen    #2D5BA3  → secondary / badges tech
+       · Vert menthe   #4ECFB3  → highlight, disponibilité
+       · Corail/rouge  #E8453C  → destructive
+     Fond : blanc cassé chaud pour ne pas fatiguer l'œil
+  ───────────────────────────────────────────────────────────── */
+
+  /* Fond général — blanc cassé légèrement bleuté, très subtil */
+  --background: oklch(0.975 0.004 240);
+
+  /* Texte principal — bleu marine extrait du fond de la bannière */
+  --foreground: oklch(0.17 0.06 240);
+
+  /* Surfaces cartes — blanc pur légèrement warm */
+  --card: oklch(0.995 0.002 240);
+  --card-foreground: oklch(0.17 0.06 240);
+
+  --popover: oklch(0.995 0.002 240);
+  --popover-foreground: oklch(0.17 0.06 240);
+
+  /* Primary — bleu marine profond #0A1628 */
+  --primary: oklch(0.19 0.075 243);
+  --primary-foreground: oklch(0.975 0.004 240);
+
+  /* Secondary — bleu électrique #1E6FD9 */
+  --secondary: oklch(0.50 0.18 243);
+  --secondary-foreground: oklch(0.975 0.004 240);
+
+  /* Muted — gris bleuté très pâle pour sections alternées */
+  --muted: oklch(0.93 0.012 240);
+  --muted-foreground: oklch(0.45 0.04 240);
+
+  /* Accent — vert menthe #4ECFB3 → badges "disponible", highlights */
+  --accent: oklch(0.76 0.12 175);
+  --accent-foreground: oklch(0.17 0.06 240);
+
+  /* Destructive — corail/rouge #E8453C */
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(0.975 0.004 240);
+
+  /* Bordures — bleu très pâle, presque imperceptible */
+  --border: oklch(0.88 0.018 240);
+  --input: oklch(0.88 0.018 240);
+
+  /* Ring focus — bleu électrique */
+  --ring: oklch(0.50 0.18 243);
+
+  /* Charts — reprend les couleurs de la bannière dans l'ordre */
+  --chart-1: oklch(0.19 0.075 243);   /* bleu marine */
+  --chart-2: oklch(0.50 0.18 243);    /* bleu électrique */
+  --chart-3: oklch(0.76 0.12 175);    /* vert menthe */
+  --chart-4: oklch(0.55 0.22 27);     /* corail */
+  --chart-5: oklch(0.38 0.13 243);    /* bleu moyen #2D5BA3 */
+
+  --radius: 0.625rem;
+
+  /* Sidebar */
+  --sidebar: oklch(0.19 0.075 243);           /* bleu marine — sidebar sombre */
+  --sidebar-foreground: oklch(0.93 0.012 240);
+  --sidebar-primary: oklch(0.76 0.12 175);    /* vert menthe */
+  --sidebar-primary-foreground: oklch(0.17 0.06 240);
+  --sidebar-accent: oklch(0.50 0.18 243);
+  --sidebar-accent-foreground: oklch(0.975 0.004 240);
+  --sidebar-border: oklch(0.26 0.07 243);
+  --sidebar-ring: oklch(0.76 0.12 175);
+
+  /* Fonts déclarées ici pour usage via var() dans le CSS */
+  --font-playfair: 'Playfair Display', serif;
+  --font-dm-sans: 'DM Sans', sans-serif;
+}
+
+/* ─── Dark mode désactivé — light only ─────────────────────────
+   Le bloc .dark est conservé structurellement pour compatibilité
+   Tailwind mais les valeurs restent proches du light pour éviter
+   toute inversion accidentelle si la classe .dark venait à être
+   appliquée par erreur.
+──────────────────────────────────────────────────────────────── */
+.dark {
+  --background: oklch(0.975 0.004 240);
+  --foreground: oklch(0.17 0.06 240);
+  --card: oklch(0.995 0.002 240);
+  --card-foreground: oklch(0.17 0.06 240);
+  --popover: oklch(0.995 0.002 240);
+  --popover-foreground: oklch(0.17 0.06 240);
+  --primary: oklch(0.19 0.075 243);
+  --primary-foreground: oklch(0.975 0.004 240);
+  --secondary: oklch(0.50 0.18 243);
+  --secondary-foreground: oklch(0.975 0.004 240);
+  --muted: oklch(0.93 0.012 240);
+  --muted-foreground: oklch(0.45 0.04 240);
+  --accent: oklch(0.76 0.12 175);
+  --accent-foreground: oklch(0.17 0.06 240);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(0.975 0.004 240);
+  --border: oklch(0.88 0.018 240);
+  --input: oklch(0.88 0.018 240);
+  --ring: oklch(0.50 0.18 243);
+  --chart-1: oklch(0.19 0.075 243);
+  --chart-2: oklch(0.50 0.18 243);
+  --chart-3: oklch(0.76 0.12 175);
+  --chart-4: oklch(0.55 0.22 27);
+  --chart-5: oklch(0.38 0.13 243);
+  --sidebar: oklch(0.19 0.075 243);
+  --sidebar-foreground: oklch(0.93 0.012 240);
+  --sidebar-primary: oklch(0.76 0.12 175);
+  --sidebar-primary-foreground: oklch(0.17 0.06 240);
+  --sidebar-accent: oklch(0.50 0.18 243);
+  --sidebar-accent-foreground: oklch(0.975 0.004 240);
+  --sidebar-border: oklch(0.26 0.07 243);
+  --sidebar-ring: oklch(0.76 0.12 175);
+}
+
+@theme inline {
+  --font-sans: 'DM Sans', 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
