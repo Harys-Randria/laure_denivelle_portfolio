@@ -113,7 +113,7 @@ export function Hero() {
                 LinkedIn
               </a>
               <a
-                href="/CV-Laure-Denivelle.pdf"
+                href={language === 'fr' ? '/CV-Laure-Denivelle-FR.pdf' : '/CV-Laure-Denivelle-EN.pdf'}
                 download
                 className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground/70 transition-colors hover:border-foreground/30 hover:text-foreground"
               >
