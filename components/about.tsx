@@ -96,22 +96,20 @@ export function About() {
                 : 'Senior BI Consultant & Qlik Expert'}
             </motion.h2>
 
-            {/* About texte complet — découpé en deux paragraphes visuels */}
-            <motion.div {...fadeUp(0.12)} className="space-y-4">
-              {data.about.split('. ').reduce<string[][]>((acc, s, i) => {
-                const half = Math.ceil(data.about.split('. ').length / 2);
-                if (i < half) acc[0] = [...(acc[0] || []), s];
-                else acc[1] = [...(acc[1] || []), s];
-                return acc;
-              }, []).map((sentences, pi) => (
-                <p
-                  key={pi}
-                  className="text-base leading-[1.85] text-foreground/80"
-                  style={pi === 0 ? { borderLeft: '3px solid #1E6FD9', paddingLeft: '1rem' } : {}}
-                >
-                  {sentences.join('. ').trim()}{pi === 0 ? '.' : ''}
-                </p>
-              ))}
+            {/* About — deux paragraphes distincts et stables */}
+            <motion.div {...fadeUp(0.12)} className="space-y-5">
+              {/* Paragraphe 1 : intro / positionnement */}
+              <p
+                className="text-base leading-[1.85] text-foreground/80"
+                style={{ borderLeft: '3px solid #1E6FD9', paddingLeft: '1rem' }}
+              >
+                {data.aboutIntro}
+              </p>
+
+              {/* Paragraphe 2 : différenciation */}
+              <p className="text-base leading-[1.85] text-foreground/80">
+                {data.aboutDiff}
+              </p>
             </motion.div>
           </div>
 

@@ -7,6 +7,9 @@ export interface CVData {
     phone: string;
     linkedin: string;
     about: string;
+    heroAbout: string;
+    aboutIntro: string;
+    aboutDiff: string;
     stats: Array<{ label: string; value: string }>;
     skills: Array<{
       category: string;
@@ -46,6 +49,9 @@ export interface CVData {
     phone: string;
     linkedin: string;
     about: string;
+    heroAbout: string;
+    aboutIntro: string;
+    aboutDiff: string;
     stats: Array<{ label: string; value: string }>;
     skills: Array<{
       category: string;
@@ -84,10 +90,13 @@ export const cvData: CVData = {
     name: 'Laure Denivelle',
     title: 'Consultante BI Senior',
     subtitle: 'Experte Qlik Sense / QlikView / Qlik Cloud',
-    email: 'laure_d94@hotmail.com',
+    email: 'ldecision@outlook.com',
     phone: '+33 6 66 51 00 38',
     linkedin: 'linkedin.com/in/laure-denivelle-33890544',
     about: 'Consultante BI Senior avec +10 ans d\'expérience en conception, développement et optimisation de solutions décisionnelles pour secteurs Agro-alimentaire, Logement, Industrie et Formation. Experte Qlik (Sense, Cloud, View) certifiée Qlik Data Architect et Microsoft Power BI (PL-300). Spécialisée en pilotage de projets BI, modélisation de données, architectures Qlik et industrialisation des reportings. Intervention sur l\'ensemble du cycle BI : cadrage, modélisation, développement, migration Cloud, mise en production et accompagnement utilisateurs. Coordination transverse entre équipes métier, IT et partenaires avec capacité démontrée à moderniser des infrastructures BI et automatiser des reportings à grande échelle.',
+    heroAbout: 'Consultante BI Senior avec +10 ans d\'expérience sur l\'ensemble du cycle décisionnel : recueil des besoins, modélisation, développement et migration Cloud. Experte Qlik (Sense, Cloud, View) et Power BI, j\'ai accompagné des projets complexes dans des secteurs variés — agro-alimentaire, résidences services seniors, logement social, industrie et formation.',
+    aboutIntro: 'Consultante BI Senior freelance avec +10 ans d\'expérience sur l\'ensemble du cycle décisionnel : recueil des besoins, modélisation, développement et migration Cloud. Experte Qlik (Sense, Cloud, View) et Power BI, certifiée Qlik Data Architect et Microsoft Power BI (PL-300). Spécialisée en pilotage de projets BI de bout en bout, architecture Qlik et industrialisation des reportings.',
+    aboutDiff: 'Ce qui me différencie : je ne livre pas juste des dashboards. Je prends en charge le projet de bout en bout — avec les métiers pour comprendre leurs vrais besoins, avec les data ingénieurs et les équipes d\'intégration pour la construction du data warehouse, avec l\'IT pour garantir une architecture solide, et avec les utilisateurs pour que la solution soit réellement adoptée. J\'ai appliqué cette approche dans des environnements variés — agro-alimentaire, résidences services seniors, logement social, industrie minérale, formation — sur des projets allant de la refonte complète d\'un parc Qlik à la migration Cloud en passant par l\'industrialisation de reportings à grande échelle.',
     stats: [
       { label: 'Années d\'expérience', value: '10+' },
       { label: 'Projets BI réalisés', value: '50+' },
@@ -249,6 +258,9 @@ export const cvData: CVData = {
     phone: '+33 6 66 51 00 38',
     linkedin: 'linkedin.com/in/laure-denivelle-33890544',
     about: 'Senior BI Consultant with 10+ years of experience in designing, developing, and optimizing business intelligence solutions for Agro-food, Housing, Manufacturing, and Training sectors. Qlik expert (Sense, Cloud, View) certified as Qlik Data Architect and Microsoft Power BI (PL-300). Specialized in BI project management, data modeling, Qlik architectures, and reporting industrialization. Full BI lifecycle expertise: scoping, modeling, development, Cloud migration, production deployment, and user training. Cross-functional coordination between business, IT, and partner teams with proven ability to modernize BI infrastructures and automate large-scale reporting.',
+    heroAbout: 'Senior BI Consultant with 10+ years of experience across the full BI lifecycle: requirements gathering, data modeling, development, and Cloud migration. Qlik expert (Sense, Cloud, View) and Power BI certified, I have led complex projects across diverse industries — agri-food, senior living residences, social housing, manufacturing, and training.',
+    aboutIntro: 'Freelance Senior BI Consultant with 10+ years of experience across the full BI lifecycle: requirements gathering, data modeling, development, and Cloud migration. Qlik expert (Sense, Cloud, View) and Power BI, certified Qlik Data Architect and Microsoft Power BI (PL-300). Specialized in end-to-end BI project management, Qlik architecture, and reporting industrialization.',
+    aboutDiff: 'What sets me apart: I don\'t just deliver dashboards. I take full ownership of the project — working with business teams to truly understand their needs, with data engineers and integration teams to build the data warehouse, with IT to ensure a solid and scalable architecture, and with end users to drive genuine adoption. I have applied this approach across diverse environments — agri-food, senior living residences, social housing, mineral industry, and training — on projects ranging from complete Qlik portfolio overhauls and Cloud migrations to large-scale reporting industrialization.',
     stats: [
       { label: 'Years of Experience', value: '10+' },
       { label: 'BI Projects Delivered', value: '50+' },

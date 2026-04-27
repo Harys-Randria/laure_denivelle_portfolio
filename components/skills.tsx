@@ -12,26 +12,46 @@ import {
   Database,
   Shield,
   Sparkles,
+  BadgeCheck,
 } from 'lucide-react';
 
 /* ── Icône + couleur accent par catégorie ── */
 const CATEGORY_META: Record<string, { icon: React.ElementType; color: string; bg: string }> = {
-  'Gestion de Projet BI':      { icon: FolderKanban, color: '#1A3A6B', bg: '#1E6FD912' },
-  'BI Project Management':     { icon: FolderKanban, color: '#1A3A6B', bg: '#1E6FD912' },
-  'Qlik Expertise':            { icon: BrainCircuit,  color: '#1E6FD9', bg: '#1E6FD912' },
-  'Migration & Architecture':  { icon: Cloud,         color: '#2D5BA3', bg: '#2D5BA308' },
-  'Modélisation & Performance':{ icon: BarChart3,     color: '#1A3A6B', bg: '#1A3A6B0D' },
-  'Modeling & Performance':    { icon: BarChart3,     color: '#1A3A6B', bg: '#1A3A6B0D' },
-  'Business Intelligence':     { icon: PieChart,      color: '#1E6FD9', bg: '#1E6FD912' },
-  'Data Management':           { icon: Database,      color: '#2D5BA3', bg: '#2D5BA308' },
-  'Gouvernance & Sécurité':    { icon: Shield,        color: '#0f1e3d', bg: '#0f1e3d08' },
-  'Governance & Security':     { icon: Shield,        color: '#0f1e3d', bg: '#0f1e3d08' },
+  'Gestion de Projet BI':       { icon: FolderKanban, color: '#1A3A6B', bg: '#1E6FD912' },
+  'BI Project Management':      { icon: FolderKanban, color: '#1A3A6B', bg: '#1E6FD912' },
+  'Qlik Expertise':             { icon: BrainCircuit, color: '#1E6FD9', bg: '#1E6FD912' },
+  'Migration & Architecture':   { icon: Cloud,        color: '#2D5BA3', bg: '#2D5BA308' },
+  'Modélisation & Performance': { icon: BarChart3,    color: '#1A3A6B', bg: '#1A3A6B0D' },
+  'Modeling & Performance':     { icon: BarChart3,    color: '#1A3A6B', bg: '#1A3A6B0D' },
+  'Business Intelligence':      { icon: PieChart,     color: '#1E6FD9', bg: '#1E6FD912' },
+  'Data Management':            { icon: Database,     color: '#2D5BA3', bg: '#2D5BA308' },
+  'Gouvernance & Sécurité':     { icon: Shield,       color: '#0f1e3d', bg: '#0f1e3d08' },
+  'Governance & Security':      { icon: Shield,       color: '#0f1e3d', bg: '#0f1e3d08' },
 };
 
 const DEFAULT_META = { icon: BrainCircuit, color: '#1E6FD9', bg: '#1E6FD912' };
 
-/* Première carte (Qlik) mise en avant */
+/* Carte Qlik mise en avant */
 const FEATURED_IDX = 1;
+
+/* Catégories ayant une certification à mettre en avant */
+const CERT_CATEGORIES = new Set([
+  'Business Intelligence',
+]);
+
+/* Label de certification par catégorie */
+const CERT_LABEL: Record<string, { fr: string; en: string; skill: string }> = {
+  'Business Intelligence': {
+    fr: 'Certifiée Microsoft PL-300',
+    en: 'Microsoft PL-300 Certified',
+    skill: 'Power BI',
+  },
+};
+
+/* Skill pill à mettre en avant dans ces catégories */
+const HIGHLIGHT_SKILL: Record<string, string> = {
+  'Business Intelligence': 'Power BI',
+};
 
 const containerVariants = {
   hidden: {},
@@ -100,6 +120,9 @@ export function Skills() {
             const meta = CATEGORY_META[group.category] ?? DEFAULT_META;
             const Icon = meta.icon;
             const isFeatured = idx === FEATURED_IDX;
+            const hasCert = CERT_CATEGORIES.has(group.category);
+            const certLabel = CERT_LABEL[group.category];
+            const highlightSkill = HIGHLIGHT_SKILL[group.category];
 
             return (
               <motion.div
@@ -119,7 +142,7 @@ export function Skills() {
                       <div className="absolute -top-20 -right-20 w-40 h-40 bg-white rounded-full blur-2xl" />
                       <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-[#4ECFB3] rounded-full blur-2xl" />
                     </div>
-                    <div 
+                    <div
                       className="absolute inset-0 rounded-2xl opacity-5"
                       style={{
                         backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 1px)',
@@ -145,9 +168,9 @@ export function Skills() {
                     }`}
                     style={!isFeatured ? { background: meta.bg } : undefined}
                   >
-                    <Icon 
-                      className={`h-4 w-4 ${isFeatured ? 'text-white' : ''}`} 
-                      style={!isFeatured ? { color: meta.color } : undefined} 
+                    <Icon
+                      className={`h-4 w-4 ${isFeatured ? 'text-white' : ''}`}
+                      style={!isFeatured ? { color: meta.color } : undefined}
                     />
                   </div>
                   <h3
@@ -165,44 +188,62 @@ export function Skills() {
 
                 {/* Pills */}
                 <div className="flex flex-wrap gap-1.5 relative z-10">
-                  {group.items.map((skill, si) => (
-                    <span
-                      key={si}
-                      className={`rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-all ${
-                        isFeatured
-                          ? si < 3
-                            ? 'bg-white text-[#1A3A6B] border-white shadow-md hover:scale-105'
-                            : 'bg-white/10 text-white/90 border-white/20 hover:bg-white/15'
-                          : 'hover:bg-[#1E6FD9]/5'
-                      }`}
-                      style={
-                        !isFeatured && isFeatured && si < 3
-                          ? {
-                              background: '#1E6FD912',
-                              borderColor: '#1E6FD930',
-                              color: '#1A3A6B',
-                            }
-                          : !isFeatured
-                          ? {
-                              background: 'var(--muted)',
-                              borderColor: 'var(--border)',
-                              color: 'var(--muted-foreground)',
-                            }
-                          : undefined
-                      }
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  {group.items.map((skill, si) => {
+                    const isHighlighted = highlightSkill && skill.startsWith(highlightSkill);
+                    return (
+                      <span
+                        key={si}
+                        className={`rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-all ${
+                          isFeatured
+                            ? si < 3
+                              ? 'bg-white text-[#1A3A6B] border-white shadow-md hover:scale-105'
+                              : 'bg-white/10 text-white/90 border-white/20 hover:bg-white/15'
+                            : isHighlighted
+                            ? 'hover:scale-105'
+                            : 'hover:bg-[#1E6FD9]/5'
+                        }`}
+                        style={
+                          !isFeatured && isHighlighted
+                            ? {
+                                background: '#1E6FD9',
+                                borderColor: '#1E6FD9',
+                                color: '#ffffff',
+                                fontWeight: 600,
+                              }
+                            : !isFeatured
+                            ? {
+                                background: 'var(--muted)',
+                                borderColor: 'var(--border)',
+                                color: 'var(--muted-foreground)',
+                              }
+                            : undefined
+                        }
+                      >
+                        {skill}
+                      </span>
+                    );
+                  })}
                 </div>
 
-                {/* Indicateur de certification pour Qlik */}
+                {/* Indicateur de certification — Qlik */}
                 {isFeatured && (
                   <div className="mt-4 pt-4 border-t border-white/20 relative z-10">
                     <div className="flex items-center gap-2">
                       <div className="h-1.5 w-1.5 rounded-full bg-[#4ECFB3] animate-pulse" />
                       <p className="text-[10px] text-white/70 uppercase tracking-wider">
-                        {language === 'fr' ? 'Certifié Qlik Sense' : 'Qlik Sense Certified'}
+                        {language === 'fr' ? 'Certifiée Qlik Data Architect' : 'Qlik Data Architect Certified'}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Indicateur de certification — Power BI et autres */}
+                {hasCert && certLabel && (
+                  <div className="mt-4 pt-4 border-t border-border relative z-10">
+                    <div className="flex items-center gap-2">
+                      <BadgeCheck className="h-3.5 w-3.5 text-[#1E6FD9] shrink-0" />
+                      <p className="text-[10px] text-[#1E6FD9] font-semibold uppercase tracking-wider">
+                        {certLabel[language]}
                       </p>
                     </div>
                   </div>
@@ -210,13 +251,11 @@ export function Skills() {
 
                 {/* Ligne décorative basse au hover */}
                 <div
-                  className={`absolute bottom-0 left-6 right-6 h-[2px] rounded-full opacity-0 transition-opacity duration-300 ${
-                    isFeatured ? 'group-hover:opacity-100' : 'group-hover:opacity-100'
-                  }`}
-                  style={{ 
-                    background: isFeatured 
-                      ? 'linear-gradient(to right, #4ECFB3, transparent)' 
-                      : `linear-gradient(to right, ${meta.color}40, transparent)` 
+                  className="absolute bottom-0 left-6 right-6 h-[2px] rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    background: isFeatured
+                      ? 'linear-gradient(to right, #4ECFB3, transparent)'
+                      : `linear-gradient(to right, ${meta.color}40, transparent)`,
                   }}
                 />
               </motion.div>

@@ -91,7 +91,7 @@ export function Hero() {
               {...fadeUp(0.16)}
               className="text-sm leading-relaxed text-foreground/75 border-l-[3px] border-[#1E6FD9] pl-4 max-w-xl"
             >
-              {data.about.slice(0, 220)}…
+              {data.heroAbout}
             </motion.p>
 
             {/* CTA row */}
