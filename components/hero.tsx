@@ -4,27 +4,74 @@ import { Easing, motion } from 'framer-motion';
 import { useLanguage } from '@/lib/language-context';
 import { cvData } from '@/lib/cv-data';
 import Image from 'next/image';
-import { Mail, Linkedin, Download, BadgeCheck } from 'lucide-react';
+import { Mail, Linkedin, Download, BadgeCheck, Award, Rocket, MonitorPlay, Users } from 'lucide-react';
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1]as Easing },
+  transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as Easing },
 });
 
-const STATS_EXTRA = {
-  fr: { label: 'Utilisateurs impactés', value: '500+' },
-  en: { label: 'Users Impacted', value: '500+' },
+// ── Metrics enrichis avec icône + label + description ──
+const STATS_CONFIG = {
+  fr: [
+    {
+      icon: Award,
+      value: '10+',
+      label: "ans d'expérience",
+      description: 'Expertise BI & data au service de la performance',
+    },
+    {
+      icon: Rocket,
+      value: '10+',
+      label: 'projets menés de bout en bout',
+      description: "De l'expression du besoin à la mise en production",
+    },
+    {
+      icon: MonitorPlay,
+      value: '50+',
+      label: 'applications BI en production',
+      description: 'Qlik Sense / QlikView / Qlik Cloud & Power BI',
+    },
+    {
+      icon: Users,
+      value: '150+',
+      label: 'utilisateurs formés',
+      description: 'Accompagnement & montée en compétences des équipes',
+    },
+  ],
+  en: [
+    {
+      icon: Award,
+      value: '10+',
+      label: 'years of experience',
+      description: 'BI & data expertise driving business performance',
+    },
+    {
+      icon: Rocket,
+      value: '10+',
+      label: 'end-to-end projects delivered',
+      description: 'From requirements gathering to production deployment',
+    },
+    {
+      icon: MonitorPlay,
+      value: '50+',
+      label: 'BI applications in production',
+      description: 'Qlik Sense / QlikView / Qlik Cloud & Power BI',
+    },
+    {
+      icon: Users,
+      value: '150+',
+      label: 'users trained',
+      description: 'Coaching & upskilling teams across organisations',
+    },
+  ],
 };
 
 export function Hero() {
   const { language } = useLanguage();
   const data = cvData[language];
-
-  const allStats = [
-    ...data.stats,
-    STATS_EXTRA[language],
-  ].slice(0, 4);
+  const stats = STATS_CONFIG[language];
 
   return (
     <section id="hero" className="relative pt-28 pb-20 sm:pt-36 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -45,8 +92,7 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute -top-32 -right-32 -z-10 w-[480px] h-[480px] rounded-full"
         style={{
-          background:
-            'radial-gradient(circle, rgba(30,111,217,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(30,111,217,0.08) 0%, transparent 70%)',
         }}
       />
 
@@ -86,7 +132,7 @@ export function Hero() {
               </p>
             </motion.div>
 
-            {/* About excerpt — with left accent border */}
+            {/* About excerpt */}
             <motion.p
               {...fadeUp(0.16)}
               className="text-sm leading-relaxed text-foreground/75 border-l-[3px] border-[#1E6FD9] pl-4 max-w-xl"
@@ -122,29 +168,49 @@ export function Hero() {
               </a>
             </motion.div>
 
-            {/* Stats grid */}
+            {/* ── Stats grid enrichis ── */}
             <motion.div
               {...fadeUp(0.32)}
               className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2"
             >
-              {allStats.map((stat, i) => (
-                <div
-                  key={i}
-                  className="rounded-xl border border-border bg-card px-4 py-3.5 transition-shadow hover:shadow-sm"
-                  style={i === 0 ? { borderTop: '3px solid #1E6FD9' } : {}}
-                >
-                  <p
-                    className="text-2xl font-bold text-[#1A3A6B] leading-none"
-                    style={{ fontFamily: 'var(--font-playfair)' }}
+              {stats.map((stat, i) => {
+                const Icon = stat.icon;
+                return (
+                  <div
+                    key={i}
+                    className="rounded-xl border border-border bg-card px-4 py-4 flex flex-col gap-3 transition-shadow hover:shadow-sm"
+                    style={i === 0 ? { borderTop: '3px solid #1E6FD9' } : {}}
                   >
-                    {stat.value}
-                  </p>
-                  <p className="mt-1.5 text-[11px] leading-tight text-muted-foreground">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
+                    {/* Icône dans un cercle */}
+                    <div
+                      className="flex h-9 w-9 items-center justify-center rounded-full"
+                      style={{ background: '#1E6FD912' }}
+                    >
+                      <Icon className="h-4 w-4 text-[#1E6FD9]" />
+                    </div>
+
+                    {/* Valeur */}
+                    <p
+                      className="text-2xl font-bold text-[#1A3A6B] leading-none"
+                      style={{ fontFamily: 'var(--font-playfair)' }}
+                    >
+                      {stat.value}
+                    </p>
+
+                    {/* Label principal */}
+                    <p className="text-[11px] font-semibold leading-tight text-foreground">
+                      {stat.label}
+                    </p>
+
+                    {/* Description */}
+                    <p className="text-[10px] leading-snug text-muted-foreground">
+                      {stat.description}
+                    </p>
+                  </div>
+                );
+              })}
             </motion.div>
+
           </div>
 
           {/* ── Right column : photo + certifs ── */}
@@ -156,13 +222,9 @@ export function Hero() {
           >
             {/* Photo frame */}
             <div className="relative">
-              {/* Decorative ring */}
               <div
                 className="absolute -inset-2 rounded-2xl"
-                style={{
-                  background:
-                    'linear-gradient(135deg, #1E6FD930 0%, #4ECFB320 100%)',
-                }}
+                style={{ background: 'linear-gradient(135deg, #1E6FD930 0%, #4ECFB320 100%)' }}
               />
               <div className="relative h-72 w-56 overflow-hidden rounded-xl border-2 border-white shadow-lg sm:h-80 sm:w-64">
                 <Image
